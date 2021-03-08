@@ -9,7 +9,6 @@ const user = new GetUser();
 const login = new Login();
 
 // register and inject methods
-
 module.exports = (serverfacade) => {
   apimethods.setRegister(serverfacade.injectApiMethod.bind(serverfacade));
   apimethods.registerMethod(user.path, user.restfulMethod, user.guard, user.method);

@@ -12,6 +12,7 @@ middlewarecollection.registerMiddleware(CookieParser);
 const middle = middlewarecollection.getAllMiddleware();
 
 module.exports = (serverfacade) => {
-  serverfacade.injectMiddleware(middle[0]);
-  serverfacade.injectMiddleware(middle[1]);
+  middle.forEach((e) => {
+    serverfacade.injectMiddleware(e);
+  });
 };
