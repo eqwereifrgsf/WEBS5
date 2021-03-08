@@ -11,9 +11,9 @@ module.exports = class GetUser {
   guard(req, res, next) {
     if (Auth.existsToken(req.cookies.AuthToken) === true) {
       next();
-    } else {
-      next('Not logged in!');
+      return;
     }
+    next('Not logged in!');
   }
 
   async method(req, res) {

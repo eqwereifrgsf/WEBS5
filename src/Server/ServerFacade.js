@@ -10,8 +10,13 @@ module.exports = class ServerFacade {
     this.webserver.runServer(port);
   }
 
-  injectApiMethod(path, resfulMethod, method, guard) {
-    this.webserver.addApiMethod(path, resfulMethod, method, guard);
+  injectApiMethod(...args) {
+    const path = args[args.length - 1];
+    args.pop();
+    args.splice(1, 0, path);
+    const restfulMethod = args[0];
+    args.shift();
+    this.webserver.addApiMethod(restfulMethod, ...args);
   }
 
   injectMiddleware(middleware) {

@@ -1,13 +1,24 @@
 module.exports = class ApiMethods {
   constructor() {
     this.dict = {};
+    this.registerFunc = () => {};
   }
 
-  registerMethod(path, resfulMethod, method, guard) {
-    this.dict[path] = [resfulMethod, method, guard];
+  registerMethod(path, ...args) {
+    this.dict[path] = args;
+    args.push(path);
+    this.getRegister()(...args);
   }
 
   getAllMethods() {
     return this.dict;
+  }
+
+  setRegister(fun) {
+    this.registerFunc = fun;
+  }
+
+  getRegister() {
+    return this.registerFunc;
   }
 };

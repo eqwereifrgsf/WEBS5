@@ -18,19 +18,15 @@ function init() {
   const user = new GetUser();
   const login = new Login();
 
-  // register method
-  apimethods.registerMethod(user.path, user.restfulMethod, user.method, user.guard);
-  apimethods.registerMethod(login.path, login.restfulMethod, login.method);
-
   // inject middleware
   const middle = middlewarecollection.getAllMiddleware();
   serverfacade.injectMiddleware(middle[0]);
   serverfacade.injectMiddleware(middle[1]);
 
-  // inject method
-  const dict = apimethods.getAllMethods();
-  serverfacade.injectApiMethod('/user', dict['/user'][0], dict['/user'][1], dict['/user'][2]);
-  serverfacade.injectApiMethod('/login', dict['/login'][0], dict['/login'][1]);
+  // register method
+  apimethods.setRegister(serverfacade.injectApiMethod.bind(serverfacade));
+  apimethods.registerMethod(user.path, user.restfulMethod, user.guard, user.method);
+  apimethods.registerMethod(login.path, login.restfulMethod, login.method);
 
   serverfacade.startServer(port);
 }

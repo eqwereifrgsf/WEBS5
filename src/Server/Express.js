@@ -11,12 +11,8 @@ module.exports = class GetUser {
     });
   }
 
-  addApiMethod(path, resfulMethod, method, guard) {
-    if (guard !== undefined) {
-      this.app[resfulMethod](path, guard, method);
-    } else {
-      this.app[resfulMethod](path, method);
-    }
+  addApiMethod(restfulMethod, ...args) {
+    this.app[restfulMethod](...args);
   }
 
   addMiddleware(func) {
