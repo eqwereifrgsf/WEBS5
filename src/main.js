@@ -3,7 +3,6 @@ const ServerFacade = require('./Server/ServerFacade');
 const TMDBRepository = require('./Repositories/TMDBRepository');
 
 dotenv.config();
-console.log(process.env.API_KEY);
 const serverfacade = new ServerFacade();
 
 require('./Server/Middleware/MiddlewareRegistry')(serverfacade);
