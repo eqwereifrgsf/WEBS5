@@ -2,6 +2,7 @@ const UserModel = require('../Models/UserModel');
 const UserRepo = require('../Repositories/UserRepository');
 const Auth = require('../Authentication/Auth');
 
+const allowedRoles = ['Superadmin', 'Admin', 'User'];
 module.exports = class GetUser {
   constructor() {
     this.path = '/user';
@@ -9,7 +10,7 @@ module.exports = class GetUser {
   }
 
   guard(req, res, next) {
-    if (Auth.existsToken(req.cookies.AuthToken) === true) {
+    if (allowedRoles.includes(Auth.verifyToken(req.cookies.AuthToken))) {
       next();
       return;
     }
