@@ -11,6 +11,6 @@ module.exports = class GetMultiSearch {
   async method(req, res) {
     const response = await TMDBRepo.MultiSearch(req.params.query, req.query.language,
       req.query.page, req.query.includeAdult);
-    res.send(response);
+    res.status(200).json(response);
   }
 };

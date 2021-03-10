@@ -4,13 +4,14 @@ const Auth = require('../Authentication/Auth');
 
 module.exports = class Login {
   constructor() {
-    this.path = '/login';
+    this.version = '/v1';
+    this.path = `${this.version}/login`;
     this.restfulMethod = 'post';
   }
 
   async method(req, res) {
     const response = await UserRepo
-      .FindByModel(UserModel.make(req.body.Username, req.body.Password));
+      .FindByModel(UserModel.findExistingUser(req.body.Username, req.body.Password));
     if (response.length > 0) {
       const token = Auth.generateToken(response[0].Role);
       res.cookie('AuthToken', token);

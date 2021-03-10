@@ -3,10 +3,9 @@ const UserSchema = require('../Schemas/UserSchema');
 module.exports = class UserRepository {
   static Create(Model) {
     const user = new UserSchema.SchemaModel(Model);
-    user.save((err) => {
-      if (err) console.log(err);
-      return null;
-    });
+    return user.save()
+      .then((v) => v)
+      .catch(() => false);
   }
 
   static GetById(Id) {
