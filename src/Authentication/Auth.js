@@ -1,12 +1,13 @@
 const crypto = require('crypto');
 
 module.exports = class Auth {
-  static generateToken(role) {
+  static generateToken(subject, role) {
     const header = {
       alg: 'HS256',
       typ: 'JWT',
     };
     const payload = {
+      sub: subject,
       loggedInAs: role,
       iat: Math.floor(new Date().getTime() / 1000),
     };
@@ -21,10 +22,14 @@ module.exports = class Auth {
       if (splitToken.length === 3) {
         const toVerify = Buffer.from(crypto.createHmac('sha256', process.env.SECRET).update(`${splitToken[0]}.${splitToken[1]}`).digest('hex')).toString('base64');
         if (toVerify === splitToken[2]) {
-          return JSON.parse(Buffer.from(splitToken[1], 'base64')).loggedInAs;
+          const JWT = JSON.parse(Buffer.from(splitToken[1], 'base64'));
+          return {
+            id: JWT.sub,
+            role: JWT.loggedInAs,
+          };
         }
       }
     }
-    return 'guest';
+    return { id: undefined, role: 'guest' };
   }
 };

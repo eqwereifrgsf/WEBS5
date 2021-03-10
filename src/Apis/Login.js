@@ -13,7 +13,8 @@ module.exports = class Login {
     const response = await UserRepo
       .FindByModel(UserModel.findExistingUser(req.body.Username, req.body.Password));
     if (response.length > 0) {
-      const token = Auth.generateToken(response[0].Role);
+      // eslint-disable-next-line
+      const token = Auth.generateToken(response[0]._id, response[0].Role);
       res.cookie('AuthToken', token);
       res.send('Logged in.');
       return;

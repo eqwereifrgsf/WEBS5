@@ -6,7 +6,10 @@ module.exports = class UserModel {
         required: true,
         unique: true,
       },
-      Password: String,
+      Password: {
+        type: String,
+        required: true,
+      },
       Role: String,
     };
   }
