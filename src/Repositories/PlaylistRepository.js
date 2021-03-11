@@ -35,6 +35,17 @@ module.exports = class PlaylistRepository {
     return this.Save(playlist);
   }
 
+  static async RemoveMovieFromPlaylist(PlaylistID, MovieID) {
+    const playlist = await this.GetById(PlaylistID);
+    const movie = await MovieRepo.GetById(MovieID);
+
+    playlist.Movies.pull(movie);
+    movie.Playlists.pull(playlist);
+    MovieRepo.Save(movie);
+
+    return this.Save(playlist);
+  }
+
   static Save(Model) {
     return Model.save()
       .then((v) => v)
