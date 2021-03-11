@@ -1,12 +1,11 @@
 const Auth = require('../../Authentication/Auth');
 
-module.exports = function guard(allowedRoles) {
-  return function cb(req, res, next) {
-    if (allowedRoles.includes(Auth.verifyToken(req.cookies.AuthToken).role)) {
-      // set subject req.subject
-      next();
-      return;
-    }
-    next('Not logged in!');
-  };
+module.exports = function guard(req, res, next) {
+  try {
+    const payload = Auth.verifyToken(req.cookies.AuthToken);
+    req.JWTPayload = payload;
+  } catch (error) {
+    //
+  }
+  next();
 };
