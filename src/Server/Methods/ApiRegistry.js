@@ -2,8 +2,9 @@ const ApiMethods = require('./ApiMethods');
 const HasRole = require('../Middleware/HasRole');
 const MultiSearch = require('../../Apis/get/MultiSearch');
 const CreatePlaylist = require('../../Apis/post/CreatePlaylist');
-const AddToPlaylist = require('../../Apis/post/AddToPlaylist');
+const AddToPlaylist = require('../../Apis/patch/AddToPlaylist');
 const RemoveFromPlaylist = require('../../Apis/patch/RemoveFromPlaylist');
+const Playlist = require('../../Apis/get/Playlist');
 const Login = require('../../Apis/Login');
 const Register = require('../../Apis/Register');
 
@@ -14,6 +15,7 @@ const getMultiSearch = new MultiSearch();
 const postCreatePlaylist = new CreatePlaylist();
 const postAddPlaylist = new AddToPlaylist();
 const removeFromPlaylist = new RemoveFromPlaylist();
+const playlist = new Playlist();
 const login = new Login();
 const register = new Register();
 // register and inject methods
@@ -29,4 +31,6 @@ module.exports = (serverfacade) => {
     HasRole(postAddPlaylist.allowedRoles), postAddPlaylist.method);
   apimethods.registerMethod(removeFromPlaylist.path, removeFromPlaylist.restfulMethod,
     HasRole(removeFromPlaylist.allowedRoles), removeFromPlaylist.method);
+  apimethods.registerMethod(playlist.path, playlist.restfulMethod,
+    HasRole(playlist.allowedRoles), playlist.method);
 };

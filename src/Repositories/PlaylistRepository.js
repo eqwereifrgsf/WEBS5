@@ -2,6 +2,8 @@ const PlaylistSchema = require('../Schemas/PlaylistSchema');
 const UserRepo = require('./UserRepository');
 const MovieRepo = require('./MovieRepository');
 
+PlaylistSchema.SchemaModel();
+
 module.exports = class PlaylistRepository {
   static async Create(Model) {
     const playlist = new PlaylistSchema.SchemaModel(Model);
@@ -20,6 +22,12 @@ module.exports = class PlaylistRepository {
 
   static GetById(Id) {
     return PlaylistSchema.SchemaModel.findById(Id).exec()
+      .then((v) => v)
+      .catch((err) => { throw new Error(err); });
+  }
+
+  static GetAllPopulateMovies() {
+    return PlaylistSchema.SchemaModel.find({}).populate('Movies').exec()
       .then((v) => v)
       .catch((err) => { throw new Error(err); });
   }

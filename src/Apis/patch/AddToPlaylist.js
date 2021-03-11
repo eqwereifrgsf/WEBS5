@@ -4,7 +4,7 @@ module.exports = class GetMultiSearch {
   constructor() {
     this.version = '/v1';
     this.path = `${this.version}/playlist/:idPlaylist/:idMovie`;
-    this.restfulMethod = 'post';
+    this.restfulMethod = 'patch';
     this.allowedRoles = ['Superadmin', 'Admin', 'User'];
   }
 

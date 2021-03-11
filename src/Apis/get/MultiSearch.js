@@ -14,8 +14,6 @@ module.exports = class GetMultiSearch {
       req.query.page, req.query.includeAdult);
     response.forEach((e) => {
       MovieRepo.Create({
-        Title: e.original_title || e.title || e.name,
-        Description: e.overview,
         TmdbID: e.id,
       });
     });

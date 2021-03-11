@@ -11,4 +11,15 @@ module.exports = class TMDBRepository {
     }
     return {};
   }
+
+  static async GetMovie(MovieID) {
+    try {
+      // eslint-disable-next-line
+      let response = await httpFacade.get(`${process.env.BASE_API_URL}/${process.env.API_VERSION}/movie/${MovieID}?api_key=${process.env.API_KEY}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+    return {};
+  }
 };

@@ -1,6 +1,5 @@
 const dotenv = require('dotenv');
 const ServerFacade = require('./Server/ServerFacade');
-// const TMDBRepository = require('./Repositories/TMDBRepository');
 
 dotenv.config();
 const serverfacade = new ServerFacade();

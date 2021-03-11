@@ -5,19 +5,6 @@ const { Schema } = Mongoose.Mongoose;
 module.exports = class MovieModel {
   static model() {
     return {
-      Title: {
-        type: String,
-        required: true,
-      },
-      Description: {
-        type: String,
-      },
-      ReleaseDate: {
-        type: String,
-      },
-      MediaType: {
-        type: String,
-      },
       TmdbID: {
         type: Number,
         unique: true,

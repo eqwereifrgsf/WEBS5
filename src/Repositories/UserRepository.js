@@ -1,5 +1,7 @@
 const UserSchema = require('../Schemas/UserSchema');
 
+UserSchema.SchemaModel();
+
 module.exports = class UserRepository {
   static Create(Model) {
     const user = new UserSchema.SchemaModel(Model);

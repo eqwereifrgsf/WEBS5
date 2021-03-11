@@ -1,5 +1,7 @@
 const MovieSchema = require('../Schemas/MovieSchema');
 
+MovieSchema.SchemaModel();
+
 module.exports = class MovieRepository {
   static Create(Model) {
     const movie = new MovieSchema.SchemaModel(Model);
