@@ -1,3 +1,7 @@
+const Mongoose = require('../Database/Mongoose');
+
+const { Schema } = Mongoose.Mongoose;
+
 module.exports = class UserModel {
   static model() {
     return {
@@ -11,6 +15,10 @@ module.exports = class UserModel {
         required: true,
       },
       Role: String,
+      Playlists: [{
+        type: Schema.ObjectId,
+        ref: 'Playlist',
+      }],
     };
   }
 

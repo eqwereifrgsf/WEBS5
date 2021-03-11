@@ -22,7 +22,6 @@ module.exports = class Auth {
       if (splitToken.length === 3) {
         const toVerify = Buffer.from(crypto.createHmac('sha256', process.env.SECRET).update(`${splitToken[0]}.${splitToken[1]}`).digest('hex')).toString('base64');
         if (toVerify === splitToken[2]) {
-          // try parse
           try {
             const payload = JSON.parse(Buffer.from(splitToken[1], 'base64'));
             return payload;

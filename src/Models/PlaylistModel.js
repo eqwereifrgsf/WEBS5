@@ -12,10 +12,12 @@ module.exports = class PlaylistModel {
       Description: {
         type: String,
       },
-      movies: [{
+      Movies: [{
         type: Schema.ObjectId,
         ref: 'Movie',
-      }],
+      },
+      ],
+      _Creator: { type: Schema.ObjectId, ref: 'User', unique: true },
     };
   }
 

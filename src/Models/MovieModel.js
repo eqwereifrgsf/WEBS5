@@ -22,7 +22,7 @@ module.exports = class MovieModel {
         type: Number,
         unique: true,
       },
-      playlists: [{
+      Playlists: [{
         type: Schema.ObjectId,
         ref: 'Playlist',
       }],
