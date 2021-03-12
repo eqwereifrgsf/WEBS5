@@ -1,8 +1,14 @@
+const { toXML } = require('jstoxml');
 const express = require('express');
 
 module.exports = class GetUser {
   constructor() {
     this.app = express();
+    this.app.response.sendCustom = function (statusCode, type = 'json', message) {
+      return this.contentType(type)
+        .status(statusCode)
+        .send(type === 'text/xml' ? toXML(message) : message);
+    };
   }
 
   runServer(port) {
