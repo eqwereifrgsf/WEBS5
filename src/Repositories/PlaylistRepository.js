@@ -26,6 +26,12 @@ module.exports = class PlaylistRepository {
       .catch((err) => { throw new Error(err); });
   }
 
+  static GetByIdPopulateMovies(Id) {
+    return PlaylistSchema.SchemaModel.findById(Id).populate('Movies').exec()
+      .then((v) => v)
+      .catch((err) => { throw new Error(err); });
+  }
+
   static GetAllPopulateMovies() {
     return PlaylistSchema.SchemaModel.find({}).populate('Movies').exec()
       .then((v) => v)
@@ -52,6 +58,22 @@ module.exports = class PlaylistRepository {
     MovieRepo.Save(movie);
 
     return this.Save(playlist);
+  }
+
+  static async Remove(PlaylistID) {
+    const playlist = await this.GetById(PlaylistID);
+    if (playlist != null) {
+      // eslint-disable-next-line
+      for (const MovieID of playlist.Movies) {
+        // eslint-disable-next-line
+        await MovieRepo.RemoveFromPlaylists(playlist, MovieID);
+      }
+      // eslint-disable-next-line
+      await UserRepo.RemoveFromPlaylists(playlist, playlist._Creator);
+      await PlaylistSchema.SchemaModel.deleteOne(playlist);
+      return true;
+    }
+    return false;
   }
 
   static Save(Model) {

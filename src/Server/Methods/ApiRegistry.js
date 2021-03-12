@@ -4,6 +4,7 @@ const MultiSearch = require('../../Apis/get/MultiSearch');
 const CreatePlaylist = require('../../Apis/post/CreatePlaylist');
 const AddToPlaylist = require('../../Apis/patch/AddToPlaylist');
 const RemoveFromPlaylist = require('../../Apis/patch/RemoveFromPlaylist');
+const RemovePlaylist = require('../../Apis/delete/RemovePlaylist');
 const Playlist = require('../../Apis/get/Playlist');
 const Login = require('../../Apis/Login');
 const Register = require('../../Apis/Register');
@@ -15,6 +16,7 @@ const getMultiSearch = new MultiSearch();
 const postCreatePlaylist = new CreatePlaylist();
 const postAddPlaylist = new AddToPlaylist();
 const removeFromPlaylist = new RemoveFromPlaylist();
+const removePlaylist = new RemovePlaylist();
 const playlist = new Playlist();
 const login = new Login();
 const register = new Register();
@@ -33,4 +35,6 @@ module.exports = (serverfacade) => {
     HasRole(removeFromPlaylist.allowedRoles), removeFromPlaylist.method);
   apimethods.registerMethod(playlist.path, playlist.restfulMethod,
     HasRole(playlist.allowedRoles), playlist.method);
+  apimethods.registerMethod(removePlaylist.path, removePlaylist.restfulMethod,
+    HasRole(removePlaylist.allowedRoles), removePlaylist.method);
 };

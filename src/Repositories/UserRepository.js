@@ -20,6 +20,12 @@ module.exports = class UserRepository {
       .catch((err) => { throw new Error(err); });
   }
 
+  static async RemoveFromPlaylists(Playlist, UserID) {
+    const user = await this.GetById(UserID);
+    user.Playlists.pull(Playlist);
+    return this.Save(user);
+  }
+
   static Save(Model) {
     return Model.save()
       .then((v) => v)

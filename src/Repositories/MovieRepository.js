@@ -14,6 +14,12 @@ module.exports = class MovieRepository {
       .catch((err) => { throw new Error(err); });
   }
 
+  static async RemoveFromPlaylists(Playlist, MovieID) {
+    const movie = await this.GetById(MovieID);
+    movie.Playlists.pull(Playlist);
+    return this.Save(movie);
+  }
+
   static Save(Model) {
     return Model.save()
       .then((v) => v)

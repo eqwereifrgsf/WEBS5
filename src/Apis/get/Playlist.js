@@ -11,22 +11,37 @@ module.exports = class GetMultiSearch {
 
   async method(req, res) {
     const { playlistID } = req.params;
-    if (req.params.playlistID) {
-      const response = await PlaylistRepository.GetById(playlistID);
-      res.status(200).json(response);
-    } else {
-      const response = await PlaylistRepository.GetAllPopulateMovies();
+
+    const addExternalFromPlaylistArray = async (response) => {
       const newResponse = JSON.parse(JSON.stringify(response));
       // eslint-disable-next-line
       for (const playlist of newResponse) {
         // eslint-disable-next-line
-        for (const movie of playlist.Movies) {
-          // eslint-disable-next-line
-            const externalMovie = await TMDBRepo.GetMovie(movie.TmdbID);
-          // eslint-disable-next-line
-            movie.externalMovie = externalMovie;
-        }
+        const x = await addExternalFromPlaylist(playlist);
+        playlist.Movies = x;
       }
+      return newResponse;
+    };
+
+    const addExternalFromPlaylist = async (response) => {
+      const newResponse = JSON.parse(JSON.stringify(response));
+      // eslint-disable-next-line
+      for (const movie of newResponse.Movies) {
+        // eslint-disable-next-line
+          const externalMovie = await TMDBRepo.GetMovie(movie.TmdbID);
+        // eslint-disable-next-line
+          movie.externalMovie = externalMovie;
+      }
+      return newResponse;
+    };
+
+    if (req.params.playlistID) {
+      const response = await PlaylistRepository.GetByIdPopulateMovies(playlistID);
+      const newResponse = await addExternalFromPlaylist(response);
+      res.status(200).json(newResponse);
+    } else {
+      const response = await PlaylistRepository.GetAllPopulateMovies();
+      const newResponse = await addExternalFromPlaylistArray(response);
       res.status(200).json(newResponse);
     }
   }

@@ -17,7 +17,7 @@ module.exports = class PlaylistModel {
         ref: 'Movie',
       },
       ],
-      _Creator: { type: Schema.ObjectId, ref: 'User', unique: true },
+      _Creator: { type: Schema.ObjectId, ref: 'User' },
     };
   }
 
