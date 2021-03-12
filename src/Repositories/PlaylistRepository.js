@@ -32,8 +32,9 @@ module.exports = class PlaylistRepository {
       .catch((err) => { throw new Error(err); });
   }
 
-  static GetAllPopulateMovies() {
-    return PlaylistSchema.SchemaModel.find({}).populate('Movies').exec()
+  static GetAllPopulateMovies(page) {
+    return PlaylistSchema.SchemaModel.find({}).skip(page * 10).limit(10).populate('Movies')
+      .exec()
       .then((v) => v)
       .catch((err) => { throw new Error(err); });
   }

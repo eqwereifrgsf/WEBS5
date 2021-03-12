@@ -11,14 +11,22 @@ module.exports = class GetMultiSearch {
 
   async method(req, res) {
     const { playlistID } = req.params;
-
+    let page = 0;
+    try {
+      const pagenumber = parseInt(req.query.page, 10);
+      if (pagenumber < Number.MAX_SAFE_INTEGER) {
+        page = pagenumber;
+      }
+    } catch (e) {
+      //
+    }
     const addExternalFromPlaylistArray = async (response) => {
       const newResponse = JSON.parse(JSON.stringify(response));
       // eslint-disable-next-line
       for (const playlist of newResponse) {
         // eslint-disable-next-line
         const x = await addExternalFromPlaylist(playlist);
-        playlist.Movies = x;
+        playlist.Movies = x.Movies;
       }
       return newResponse;
     };
@@ -40,7 +48,7 @@ module.exports = class GetMultiSearch {
       const newResponse = await addExternalFromPlaylist(response);
       res.status(200).json(newResponse);
     } else {
-      const response = await PlaylistRepository.GetAllPopulateMovies();
+      const response = await PlaylistRepository.GetAllPopulateMovies(page);
       const newResponse = await addExternalFromPlaylistArray(response);
       res.status(200).json(newResponse);
     }
