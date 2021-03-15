@@ -1,12 +1,9 @@
-const http = require('http');
-const io = require('socket.io')(http);
+const io = require('socket.io')(80);
 
 module.exports = class SocketIO {
-  constructor(app) {
-    http.Server(app);
+  constructor() {
     this.rooms = [];
     this.addRoom('chat');
-    console.log(`Socket server listening at http://localhost:${process.env.PORT}`);
   }
 
   addRoom(room) {
@@ -22,28 +19,30 @@ module.exports = class SocketIO {
   }
 
   build() {
-    io.on('connection', (socket) => {
-      socket.on('subscribe', (arg = {}) => {
+    io.once('connection', (socket) => {
+      socket.once('subscribe', (arg = {}) => {
         try {
           if (this.rooms.includes(arg.room)) {
             socket.join(arg.room);
+            io.to('chat').emit('chat', 'someone joined chat');
           }
         } catch (error) {
           //
         }
       });
 
-      socket.on('unsubscribe', (arg = {}) => {
+      socket.once('unsubscribe', (arg = {}) => {
         try {
           if (socket.rooms.includes(arg.room)) {
             socket.leave(arg.room);
+            socket.emit('unsubscribe', arg.room);
           }
         } catch (error) {
           //
         }
       });
 
-      socket.on('chat', (arg = {}) => {
+      socket.once('chat', (arg = {}) => {
         try {
           if (arg.message && arg.event) {
             io.to('chat').emit(arg.event, arg.message);

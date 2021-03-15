@@ -1,8 +1,8 @@
 const SocketIO = require('./Socketio');
 
 module.exports = class SocketFacade {
-  constructor(app) {
-    this.socketServer = new SocketIO(app);
+  constructor() {
+    this.socketServer = new SocketIO();
   }
 
   init() {

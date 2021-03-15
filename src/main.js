@@ -4,7 +4,7 @@ const SocketFacade = require('./Server/SocketFacade');
 
 dotenv.config();
 const serverfacade = new ServerFacade();
-const socketFacade = new SocketFacade(serverfacade.getServer());
+const socketFacade = new SocketFacade();
 
 require('./Server/Middleware/MiddlewareRegistry')(serverfacade);
 require('./Server/Methods/ApiRegistry')(serverfacade);

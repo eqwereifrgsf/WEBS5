@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node ./src/main",
     "dev": "nodemon --exec \"npx eslint . && node ./src/main\"",
     "dev-fix": "nodemon --exec \"npx eslint . --fix && node ./src/main\""
@@ -33,6 +33,8 @@
     "eslint": "^7.20.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "nodemon": "^2.0.7"
+    "mocha": "^8.3.2",
+    "nodemon": "^2.0.7",
+    "socket.io-client": "^4.0.0"
   }
 }
