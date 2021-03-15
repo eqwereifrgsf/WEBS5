@@ -11,6 +11,10 @@ module.exports = class GetUser {
     };
   }
 
+  getApp() {
+    return this.app;
+  }
+
   runServer(port) {
     this.app.listen(port, () => {
       console.log(`Back-end app listening at http://localhost:${port}`);

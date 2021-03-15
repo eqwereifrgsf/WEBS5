@@ -5,6 +5,10 @@ module.exports = class ServerFacade {
     this.webserver = new WebServer();
   }
 
+  getServer() {
+    return this.webserver.getApp();
+  }
+
   startServer(port) {
     this.port = port;
     this.webserver.runServer(port);
