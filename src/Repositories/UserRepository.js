@@ -1,4 +1,5 @@
 const UserSchema = require('../Schemas/UserSchema');
+const PlaylistSchema = require('../Schemas/PlaylistSchema');
 
 UserSchema.SchemaModel();
 
@@ -24,6 +25,22 @@ module.exports = class UserRepository {
     const user = await this.GetById(UserID);
     user.Playlists.pull(Playlist);
     return this.Save(user);
+  }
+
+  static async Remove(UserID) {
+    const user = await this.GetById(UserID);
+    if (user != null) {
+      // eslint-disable-next-line
+      for (const playlistId of user.Playlists) {
+        // eslint-disable-next-line
+        await PlaylistSchema.SchemaModel.findById(playlistId).exec()
+          .then((v) => PlaylistSchema.SchemaModel.deleteOne(v))
+          .catch((err) => { throw new Error(err); });
+      }
+      await UserSchema.SchemaModel.deleteOne(user);
+      return true;
+    }
+    return false;
   }
 
   static Save(Model) {

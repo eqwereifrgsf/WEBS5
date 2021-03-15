@@ -8,6 +8,7 @@ const RemovePlaylist = require('../../Apis/delete/RemovePlaylist');
 const Playlist = require('../../Apis/get/Playlist');
 const Login = require('../../Apis/Login');
 const Register = require('../../Apis/Register');
+const RemoveUser = require('../../Apis/delete/RemoveUser');
 
 const apimethods = new ApiMethods();
 
@@ -20,6 +21,7 @@ const removePlaylist = new RemovePlaylist();
 const playlist = new Playlist();
 const login = new Login();
 const register = new Register();
+const removeUser = new RemoveUser();
 // register and inject methods
 module.exports = (serverfacade) => {
   apimethods.setRegister(serverfacade.injectApiMethod.bind(serverfacade));
@@ -37,4 +39,6 @@ module.exports = (serverfacade) => {
     HasRole(playlist.allowedRoles), playlist.method);
   apimethods.registerMethod(removePlaylist.path, removePlaylist.restfulMethod,
     HasRole(removePlaylist.allowedRoles), removePlaylist.method);
+  apimethods.registerMethod(removeUser.path, removeUser.restfulMethod,
+    HasRole(removeUser.allowedRoles), removeUser.method);
 };
