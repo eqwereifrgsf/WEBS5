@@ -10,7 +10,7 @@ module.exports = class Login {
 
   async method(req, res) {
     const response = await UserRepo
-      .Create(UserModel.createNewUser(req.body.Username, req.body.Password, 'User'));
+      .Create(UserModel.createNewUser(req.body.Username, req.body.Password, 'Admin'));
     if (response) {
       res.send('Registered.');
       return;
