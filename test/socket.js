@@ -1,9 +1,7 @@
 /* eslint-disable */
-const { AssertionError } = require('assert');
 const assert = require('assert');
 const dotenv = require('dotenv');
 const io = require("socket.io-client");
-const ServerFacade = require('../src/Server/ServerFacade');
 const SocketFacade = require('../src/Server/SocketFacade');
 
 dotenv.config();
