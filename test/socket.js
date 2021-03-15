@@ -13,11 +13,11 @@ describe('Socket can connect', () => {
       const socketFacade = new SocketFacade();
       socketFacade.init();
       const socket = io(`ws://localhost:${process.env.SOCKETPORT}`);
+
       socket.on('connect', () => {
         socket.disconnect();
         done();
       });
-      
     });
   });
 
@@ -26,9 +26,11 @@ describe('Socket can connect', () => {
       const socketFacade = new SocketFacade();
       socketFacade.init();
       const socket = io(`ws://localhost:${process.env.SOCKETPORT}`);
+
       socket.on('connect', () => {
         socket.emit('subscribe', {room: 'chat'});
       });
+
       socket.on('chat', () => {
         socket.disconnect();
         done();
@@ -41,6 +43,7 @@ describe('Socket can connect', () => {
       const socketFacade = new SocketFacade();
       socketFacade.init();
       const socket = io(`ws://localhost:${process.env.SOCKETPORT}`);
+
       socket.on('connect', () => {
         socket.emit('subscribe', {room: 'chat'});
       });
