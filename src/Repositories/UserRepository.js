@@ -33,7 +33,7 @@ module.exports = class UserRepository {
       // eslint-disable-next-line
       for (const playlistId of user.Playlists) {
         // eslint-disable-next-line
-        const xd = await PlaylistSchema.SchemaModel.findById(playlistId).exec()
+        await PlaylistSchema.SchemaModel.findById(playlistId).exec()
           .then((v) => PlaylistSchema.SchemaModel.deleteOne(v))
           .catch((err) => { throw new Error(err); });
       }
