@@ -38,6 +38,35 @@ describe('Socket can connect', () => {
     });
   });
 
+  describe('Chat', () => {
+    it('Can receive a message', (done) => {
+      const socketFacade = new SocketFacade(process.env.SOCKETPORT);
+      socketFacade.init();
+      const socket = io(`ws://localhost:${process.env.SOCKETPORT}`);
+
+      socket.on('connect', () => {
+        socket.emit('subscribe', {room: 'chat'});
+      });
+      
+      let onceSwitch = true;
+      socket.on('chat', (message) => {
+        if (!onceSwitch) {
+          assert.strictEqual(message, 'VERIFICATION');
+          socket.disconnect();
+          socketFacade.stop();
+          done();
+        }
+        if (onceSwitch) {
+          onceSwitch = false;
+          const m = {};
+          m.event = 'chat';
+          m.message = 'VERIFICATION';
+          socketFacade.messageToRoom('chat', m);
+        }
+      });
+    });
+  });
+
   describe('Unsubscribe', () => {
     it('Can unsubscribe from room', (done) => {
       const socketFacade = new SocketFacade(process.env.SOCKETPORT);
@@ -54,6 +83,7 @@ describe('Socket can connect', () => {
       socket.on('unsubscribe', (room) => {
         assert.strictEqual(room, 'chat');
         socket.disconnect();
+        socketFacade.stop();
         done();
       });
     });

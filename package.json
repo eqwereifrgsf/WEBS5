@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src/main.js",
   "scripts": {
-    "test": "mocha",
+    "test": "nyc mocha",
     "start": "node ./src/main",
     "dev": "nodemon --exec \"npx eslint . && node ./src/main\"",
     "dev-fix": "nodemon --exec \"npx eslint . --fix && node ./src/main\""
@@ -35,6 +35,7 @@
     "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.3.2",
     "nodemon": "^2.0.7",
+    "nyc": "^15.1.0",
     "socket.io-client": "^4.0.0"
   }
 }
