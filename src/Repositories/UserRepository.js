@@ -9,6 +9,12 @@ module.exports = class UserRepository {
     return this.Save(user);
   }
 
+  static GetAll() {
+    return UserSchema.SchemaModel.find({}).exec()
+      .then((v) => v)
+      .catch((err) => { throw new Error(err); });
+  }
+
   static GetById(Id) {
     return UserSchema.SchemaModel.findById(Id).exec()
       .then((v) => v)
