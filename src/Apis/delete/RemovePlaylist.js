@@ -1,6 +1,6 @@
 const PlaylistRepository = require('../../Repositories/PlaylistRepository');
 
-module.exports = class GetMultiSearch {
+module.exports = class RemovePlaylist {
   constructor() {
     this.version = '/v1';
     this.path = `${this.version}/playlist/:playlistID`;

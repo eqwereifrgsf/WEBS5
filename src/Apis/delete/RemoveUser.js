@@ -1,6 +1,6 @@
 const UserRepository = require('../../Repositories/UserRepository');
 
-module.exports = class GetMultiSearch {
+module.exports = class RemoveUser {
   constructor() {
     this.version = '/v1';
     this.path = `${this.version}/user/:userID`;

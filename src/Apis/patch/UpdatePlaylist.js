@@ -1,6 +1,11 @@
-// const PlaylistRepository = require('../../Repositories/PlaylistRepository');
+const PlaylistRepository = require('../../Repositories/PlaylistRepository');
 
-module.exports = class GetMultiSearch {
+const dict = {};
+dict.rename = PlaylistRepository.UpdatePlaylistTitle.bind(PlaylistRepository);
+dict.add = PlaylistRepository.AddMovieToPlaylist.bind(PlaylistRepository);
+dict.remove = PlaylistRepository.RemoveMovieFromPlaylist.bind(PlaylistRepository);
+
+module.exports = class UpdatePlaylist {
   constructor() {
     this.version = '/v1';
     this.path = `${this.version}/playlist/:idPlaylist`;
@@ -11,15 +16,12 @@ module.exports = class GetMultiSearch {
   async method(req, res) {
     try {
       // const obj = JSON.parse(req.body);
-      // const obj = req.body.toString();
-      console.log(JSON.parse(req.body.toString('utf-8')));
-      // const json = JSON.parse(req.body);
-      // console.log(JSON.stringify(json));
-    //   const playlistobj = await PlaylistRepository.GetById(req.params.idPlaylist);
-    //   console.log(playlistobj);
-    //   const response = await PlaylistRepository.UpdatePlaylist(req.params.idPlaylist,
-    //     req.params.playlistTitle);
-    //   res.status(200).json(response);
+      const obj = JSON.parse(req.body.toString('utf-8'));
+      // eslint-disable-next-line
+      for (const entry of obj.array) {
+        dict[entry.op](req.params.idPlaylist, entry.value);
+      }
+      res.status(200).json('OK');
     } catch (error) {
       res.status(500).send('Error');
     }
