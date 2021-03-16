@@ -11,6 +11,8 @@ const RemoveMovie = require('../../Apis/delete/RemoveMovie');
 const UpdatePlaylist = require('../../Apis/patch/UpdatePlaylist');
 const UpdateUserCredentials = require('../../Apis/patch/UpdateUserCredentials');
 const UpdateUserRole = require('../../Apis/patch/UpdateUserRole');
+const GetUser = require('../../Apis/get/GetUser');
+const GetAllUsers = require('../../Apis/get/GetAllUsers');
 
 const apimethods = new ApiMethods();
 
@@ -26,6 +28,8 @@ const removeMovie = new RemoveMovie();
 const updatePlaylist = new UpdatePlaylist();
 const updateUserCredentials = new UpdateUserCredentials();
 const updateUserRole = new UpdateUserRole();
+const getUser = new GetUser();
+const getAllUsers = new GetAllUsers();
 
 // register and inject methods
 module.exports = (serverfacade) => {
@@ -50,4 +54,8 @@ module.exports = (serverfacade) => {
     HasRole(removeUser.allowedRoles), removeUser.method);
   apimethods.registerMethod(removeMovie.path, removeMovie.restfulMethod,
     HasRole(removeMovie.allowedRoles), removeMovie.method);
+  apimethods.registerMethod(getUser.path, getUser.restfulMethod,
+    HasRole(getUser.allowedRoles), getUser.method);
+  apimethods.registerMethod(getAllUsers.path, getAllUsers.restfulMethod,
+    HasRole(getAllUsers.allowedRoles), getAllUsers.method);
 };
