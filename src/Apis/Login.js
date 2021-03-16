@@ -12,7 +12,6 @@ module.exports = class Login {
   async method(req, res) {
     const response = await UserRepo
       .FindByModel(UserModel.findExistingUser(req.body.Username, req.body.Password));
-    console.log(req.body);
     if (response.length > 0) {
       // eslint-disable-next-line
       const token = Auth.generateToken(response[0]._id, response[0].Role);
