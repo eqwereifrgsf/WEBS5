@@ -5,7 +5,7 @@ const io = require("socket.io-client");
 const SocketFacade = require('../src/Server/SocketFacade');
 
 dotenv.config();
-describe('Socket can connect', () => {
+describe('Sockets', () => {
   describe('Connection', () => {
     it(`Can connect to sockets on http://localhost:${process.env.SOCKETPORT}`, (done) => {
       const socketFacade = new SocketFacade(process.env.SOCKETPORT);
