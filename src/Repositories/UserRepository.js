@@ -57,6 +57,11 @@ module.exports = class UserRepository {
     return false;
   }
 
+  static async GetWatchlist(UserID, Query = '') {
+    const user = await this.GetById(UserID);
+    return user.Watchlist.filter((a) => a.Status === Query);
+  }
+
   static async AddToWatchlist(UserID, TmdbID) {
     const user = await this.GetById(UserID);
     user.Watchlist.push(TmdbID);
