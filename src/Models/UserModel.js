@@ -19,6 +19,10 @@ module.exports = class UserModel {
         type: Schema.ObjectId,
         ref: 'Playlist',
       }],
+      Watchlist: [{
+        MovieID: { type: Schema.ObjectId, ref: 'Movie' },
+        Status: { type: String, default: 'Plan to watch' },
+      }],
     };
   }
 

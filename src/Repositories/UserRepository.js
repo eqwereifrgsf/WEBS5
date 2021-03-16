@@ -57,6 +57,25 @@ module.exports = class UserRepository {
     return false;
   }
 
+  static async AddToWatchlist(UserID, TmdbID) {
+    const user = await this.GetById(UserID);
+    user.Watchlist.push(TmdbID);
+    return this.Save(user);
+  }
+
+  static async UpdateWatchlistMovieStatus(UserID, TmdbID, Status) {
+    const user = await this.GetById(UserID);
+    // eslint-disable-next-line
+    for (const entry of user.Watchlist) {
+      // eslint-disable-next-line
+      if (entry._id.toString() === TmdbID.toString()) {
+        entry.Status = Status;
+        break;
+      }
+    }
+    return this.Save(user);
+  }
+
   static async Remove(UserID) {
     const user = await this.GetById(UserID);
     if (user != null) {

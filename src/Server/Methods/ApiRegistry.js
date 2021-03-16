@@ -11,6 +11,8 @@ const RemoveMovie = require('../../Apis/delete/RemoveMovie');
 const UpdatePlaylist = require('../../Apis/patch/UpdatePlaylist');
 const UpdateUserCredentials = require('../../Apis/patch/UpdateUserCredentials');
 const UpdateUserRole = require('../../Apis/patch/UpdateUserRole');
+const UpdateUserWatchlist = require('../../Apis/patch/UpdateUserWatchlist');
+const UpdateUserWatchlistMovieStatus = require('../../Apis/patch/UpdateUserWatchlistMovieStatus');
 const GetUser = require('../../Apis/get/GetUser');
 const GetAllUsers = require('../../Apis/get/GetAllUsers');
 
@@ -28,6 +30,8 @@ const removeMovie = new RemoveMovie();
 const updatePlaylist = new UpdatePlaylist();
 const updateUserCredentials = new UpdateUserCredentials();
 const updateUserRole = new UpdateUserRole();
+const updateUserWatchlist = new UpdateUserWatchlist();
+const updateUserWatchlistMovieStatus = new UpdateUserWatchlistMovieStatus();
 const getUser = new GetUser();
 const getAllUsers = new GetAllUsers();
 
@@ -58,4 +62,10 @@ module.exports = (serverfacade) => {
     HasRole(getUser.allowedRoles), getUser.method);
   apimethods.registerMethod(getAllUsers.path, getAllUsers.restfulMethod,
     HasRole(getAllUsers.allowedRoles), getAllUsers.method);
+  apimethods.registerMethod(updateUserWatchlist.path, updateUserWatchlist.restfulMethod,
+    HasRole(updateUserWatchlist.allowedRoles), updateUserWatchlist.method);
+  apimethods.registerMethod(updateUserWatchlistMovieStatus.path,
+    updateUserWatchlistMovieStatus.restfulMethod,
+    HasRole(updateUserWatchlistMovieStatus.allowedRoles),
+    updateUserWatchlistMovieStatus.method);
 };
