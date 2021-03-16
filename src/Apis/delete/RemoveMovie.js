@@ -1,6 +1,6 @@
 const MovieRepository = require('../../Repositories/MovieRepository');
 
-module.exports = class GetMultiSearch {
+module.exports = class RemoveMovie {
   constructor() {
     this.version = '/v1';
     this.path = `${this.version}/movie/:movieID`;

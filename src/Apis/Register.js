@@ -1,7 +1,7 @@
 const UserModel = require('../Models/UserModel');
 const UserRepo = require('../Repositories/UserRepository');
 
-module.exports = class Login {
+module.exports = class Register {
   constructor() {
     this.version = '/v1';
     this.path = `${this.version}/register`;
