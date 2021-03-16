@@ -50,6 +50,12 @@ module.exports = class PlaylistRepository {
     return this.Save(playlist);
   }
 
+  static async UpdatePlaylist(PlaylistId, PlaylistTitle) {
+    const playlist = await this.GetById(PlaylistId);
+    playlist.Title = PlaylistTitle;
+    return this.Save(playlist);
+  }
+
   static async RemoveMovieFromPlaylist(PlaylistID, MovieID) {
     const playlist = await this.GetById(PlaylistID);
     const movie = await MovieRepo.GetById(MovieID);

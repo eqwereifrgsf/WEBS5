@@ -20,6 +20,19 @@ module.exports = class MovieRepository {
     return this.Save(movie);
   }
 
+  static async Remove(MovieID) {
+    const movie = await this.GetById(MovieID);
+    if (movie != null) {
+      // eslint-disable-next-line
+      for (const playlistId of movie.Playlists) {
+        this.RemoveFromPlaylists(playlistId, movie);
+      }
+      await MovieSchema.SchemaModel.deleteOne(movie);
+      return true;
+    }
+    return false;
+  }
+
   static Save(Model) {
     return Model.save()
       .then((v) => v)
