@@ -42,6 +42,9 @@ module.exports = class UserRepository {
   static async UpdateRole(UserID, Role) {
     const user = await this.GetById(UserID);
     if (Role === 'Admin' || Role === 'Superadmin' || Role === 'User') {
+      if (user.Role === 'Admin' && Role === 'Superadmin') {
+        return false;
+      }
       user.Role = Role;
       return this.Save(user);
     }
