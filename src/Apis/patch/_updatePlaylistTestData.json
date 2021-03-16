@@ -1,0 +1,19 @@
+{
+    "array": [
+        {
+            "op": "rename",
+            "path": "/Title",
+            "value": "xd"
+        },
+        {
+            "op": "add",
+            "path": "/Movies",
+            "value": "604f3ea58180465f6c82e530"
+        },
+        {
+            "op": "remove",
+            "path": "/Movies",
+            "value": "604f3ea58180465f6c82e52e"
+        }
+    ]
+}

@@ -27,6 +27,27 @@ module.exports = class UserRepository {
     return this.Save(user);
   }
 
+  static async UpdateUsername(UserID, Username) {
+    const user = await this.GetById(UserID);
+    user.Username = Username;
+    return this.Save(user);
+  }
+
+  static async UpdatePassword(UserID, Password) {
+    const user = await this.GetById(UserID);
+    user.Password = Password;
+    return this.Save(user);
+  }
+
+  static async UpdateRole(UserID, Role) {
+    const user = await this.GetById(UserID);
+    if (Role === 'Admin' || Role === 'Superadmin' || Role === 'User') {
+      user.Role = Role;
+      return this.Save(user);
+    }
+    return false;
+  }
+
   static async Remove(UserID) {
     const user = await this.GetById(UserID);
     if (user != null) {

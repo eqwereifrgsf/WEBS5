@@ -1,0 +1,14 @@
+{
+    "array": [
+        {
+            "op": "rename",
+            "path": "/Username",
+            "value": "Henk"
+        },
+        {
+            "op": "changepassword",
+            "path": "/Password",
+            "value": "based456"
+        }
+    ]
+}
