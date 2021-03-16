@@ -50,7 +50,7 @@ module.exports = class PlaylistRepository {
     return this.Save(playlist);
   }
 
-  static async UpdatePlaylist(PlaylistId, PlaylistTitle) {
+  static async UpdatePlaylistTitle(PlaylistId, PlaylistTitle) {
     const playlist = await this.GetById(PlaylistId);
     playlist.Title = PlaylistTitle;
     return this.Save(playlist);
@@ -59,11 +59,11 @@ module.exports = class PlaylistRepository {
   static async RemoveMovieFromPlaylist(PlaylistID, MovieID) {
     const playlist = await this.GetById(PlaylistID);
     const movie = await MovieRepo.GetById(MovieID);
-
     playlist.Movies.pull(movie);
-    movie.Playlists.pull(playlist);
-    MovieRepo.Save(movie);
-
+    if (movie != null) {
+      movie.Playlists.pull(playlist);
+      MovieRepo.Save(movie);
+    }
     return this.Save(playlist);
   }
 
