@@ -12,7 +12,7 @@ module.exports = class GetMultiSearch {
     try {
       // const obj = JSON.parse(req.body);
       // const obj = req.body.toString();
-      console.log(req.body);
+      console.log(JSON.parse(req.body.toString('utf-8')));
       // const json = JSON.parse(req.body);
       // console.log(JSON.stringify(json));
     //   const playlistobj = await PlaylistRepository.GetById(req.params.idPlaylist);

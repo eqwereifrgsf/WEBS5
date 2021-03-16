@@ -1,12 +1,14 @@
 const MiddlewareCollection = require('./MiddlewareCollection');
-const BodyParser = require('./BodyParser');
+const BodyParserRaw = require('./BodyParserRaw');
+const BodyParserURL = require('./BodyParserURL');
 const CookieParser = require('./CookieParser');
 const Authentication = require('./Authentication');
 
 const middlewarecollection = new MiddlewareCollection();
 
 // register middleware
-middlewarecollection.registerMiddleware(BodyParser);
+middlewarecollection.registerMiddleware(BodyParserRaw);
+middlewarecollection.registerMiddleware(BodyParserURL);
 middlewarecollection.registerMiddleware(CookieParser);
 middlewarecollection.registerMiddleware(Authentication);
 
