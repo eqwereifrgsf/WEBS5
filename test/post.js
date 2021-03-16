@@ -1,7 +1,7 @@
 /* eslint-disable */
 const assert = require('assert');
 const dotenv = require('dotenv');
-const Playlist = require('../src/Apis/get/Playlist');
+const Playlist = require('../src/Apis/post/CreatePlaylist');
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ describe('Posts', () => {
       req.params.title = 'testingplaylist';
       req.query = {};
       req.JWTPayload = {};
-      req.JWTPayload.sub = '1';
+      req.JWTPayload.sub = '604b72ef369c7e46686a0a4c';
       const res = {};
       res.status = function() {
         return this;

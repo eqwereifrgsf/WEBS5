@@ -2,6 +2,7 @@
 const assert = require('assert');
 const dotenv = require('dotenv');
 const MultiSearch = require('../src/Apis/get/MultiSearch');
+const Playlist = require('../src/Apis/get/Playlist');
 
 dotenv.config();
 
@@ -29,11 +30,10 @@ describe('Gets', () => {
 
   describe('Playlist', () => {
     it(`Can get /playlist`, (done) => {
-      multiSearch = new MultiSearch();
+      playlist = new Playlist();
 
       const req = {};
       req.params = {};
-      req.params.query = 'mission';
       req.query = {};
       const res = {};
       res.status = function() {
