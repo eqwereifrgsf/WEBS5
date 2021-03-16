@@ -8,12 +8,13 @@ dotenv.config();
 describe('Socket can connect', () => {
   describe('Connection', () => {
     it(`Can connect to sockets on http://localhost:${process.env.SOCKETPORT}`, (done) => {
-      const socketFacade = new SocketFacade();
+      const socketFacade = new SocketFacade(process.env.SOCKETPORT);
       socketFacade.init();
       const socket = io(`ws://localhost:${process.env.SOCKETPORT}`);
 
       socket.on('connect', () => {
         socket.disconnect();
+        socketFacade.stop();
         done();
       });
     });
@@ -21,7 +22,7 @@ describe('Socket can connect', () => {
 
   describe('Subscribe', () => {
     it('Can subscribe to room', (done) => {
-      const socketFacade = new SocketFacade();
+      const socketFacade = new SocketFacade(process.env.SOCKETPORT);
       socketFacade.init();
       const socket = io(`ws://localhost:${process.env.SOCKETPORT}`);
 
@@ -31,6 +32,7 @@ describe('Socket can connect', () => {
 
       socket.on('chat', () => {
         socket.disconnect();
+        socketFacade.stop();
         done();
       });
     });
@@ -38,7 +40,7 @@ describe('Socket can connect', () => {
 
   describe('Unsubscribe', () => {
     it('Can unsubscribe from room', (done) => {
-      const socketFacade = new SocketFacade();
+      const socketFacade = new SocketFacade(process.env.SOCKETPORT);
       socketFacade.init();
       const socket = io(`ws://localhost:${process.env.SOCKETPORT}`);
 
@@ -46,14 +48,13 @@ describe('Socket can connect', () => {
         socket.emit('subscribe', {room: 'chat'});
       });
       socket.on('chat', () => {
-        done();
+        socket.emit('unsubscribe', {room: 'chat'});
       });
 
       socket.on('unsubscribe', (room) => {
-        if (assert.strictEqual(room, 'chat')) {
-          socket.disconnect();
-          done();
-        }
+        assert.strictEqual(room, 'chat');
+        socket.disconnect();
+        done();
       });
     });
   });

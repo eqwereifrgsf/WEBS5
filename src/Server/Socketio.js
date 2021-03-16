@@ -1,9 +1,11 @@
-const io = require('socket.io')(80);
+let io;
 
 module.exports = class SocketIO {
-  constructor() {
+  constructor(port) {
     this.rooms = [];
     this.addRoom('chat');
+    // eslint-disable-next-line
+    io = require('socket.io')(port);
   }
 
   addRoom(room) {
@@ -16,6 +18,10 @@ module.exports = class SocketIO {
     } catch (error) {
       //
     }
+  }
+
+  closeServer() {
+    io.close();
   }
 
   build() {
@@ -33,7 +39,7 @@ module.exports = class SocketIO {
 
       socket.once('unsubscribe', (arg = {}) => {
         try {
-          if (socket.rooms.includes(arg.room)) {
+          if (socket.rooms.has(arg.room)) {
             socket.leave(arg.room);
             socket.emit('unsubscribe', arg.room);
           }
