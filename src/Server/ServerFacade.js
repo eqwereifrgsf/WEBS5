@@ -1,13 +1,17 @@
 const WebServer = require('./Express');
 
 module.exports = class ServerFacade {
-  constructor() {
+  constructor(port) {
+    this.port = port;
     this.webserver = new WebServer();
   }
 
-  startServer(port) {
-    this.port = port;
-    this.webserver.runServer(port);
+  getServer() {
+    return this.webserver.getApp();
+  }
+
+  startServer() {
+    this.webserver.runServer(this.port);
   }
 
   injectApiMethod(...args) {
