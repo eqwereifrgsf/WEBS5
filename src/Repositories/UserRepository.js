@@ -10,13 +10,19 @@ module.exports = class UserRepository {
   }
 
   static GetAll() {
-    return UserSchema.SchemaModel.find({}).exec()
+    return UserSchema.SchemaModel.find({}).populate('Watchlist.Watching').exec()
       .then((v) => v)
       .catch((err) => { throw new Error(err); });
   }
 
   static GetById(Id) {
-    return UserSchema.SchemaModel.findById(Id).exec()
+    return UserSchema.SchemaModel.findById(Id).populate('Watchlist.Watching').exec()
+      .then((v) => v)
+      .catch((err) => { throw new Error(err); });
+  }
+
+  static GetSpecificWatchlist(Id, Filter) {
+    return UserSchema.SchemaModel.findById(Id).populate(`Watchlist.${Filter}`).exec()
       .then((v) => v)
       .catch((err) => { throw new Error(err); });
   }
@@ -62,22 +68,9 @@ module.exports = class UserRepository {
     return user.Watchlist.filter((a) => a.Status === Query);
   }
 
-  static async AddToWatchlist(UserID, TmdbID) {
+  static async AddToWatchlist(UserID, movieId) {
     const user = await this.GetById(UserID);
-    user.Watchlist.push(TmdbID);
-    return this.Save(user);
-  }
-
-  static async UpdateWatchlistMovieStatus(UserID, TmdbID, Status) {
-    const user = await this.GetById(UserID);
-    // eslint-disable-next-line
-    for (const entry of user.Watchlist) {
-      // eslint-disable-next-line
-      if (entry._id.toString() === TmdbID.toString()) {
-        entry.Status = Status;
-        break;
-      }
-    }
+    user.Watchlist.Watching.push(movieId);
     return this.Save(user);
   }
 
