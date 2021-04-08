@@ -28,6 +28,7 @@ describe('Sockets', () => {
 
       socket.on('connect', () => {
         socket.emit('subscribe', {room: 'chat'});
+        done();
       });
 
       socket.on('chat', () => {
@@ -46,8 +47,8 @@ describe('Sockets', () => {
 
       socket.on('connect', () => {
         socket.emit('subscribe', {room: 'chat'});
+        done();
       });
-      
       let onceSwitch = true;
       socket.on('chat', (message) => {
         if (!onceSwitch) {
@@ -62,6 +63,7 @@ describe('Sockets', () => {
           m.event = 'chat';
           m.message = 'VERIFICATION';
           socketFacade.messageToRoom('chat', m);
+          done();
         }
       });
     });
@@ -75,9 +77,11 @@ describe('Sockets', () => {
 
       socket.on('connect', () => {
         socket.emit('subscribe', {room: 'chat'});
+        done();
       });
       socket.on('chat', () => {
         socket.emit('unsubscribe', {room: 'chat'});
+        done();
       });
 
       socket.on('unsubscribe', (room) => {

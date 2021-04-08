@@ -4,7 +4,7 @@ const dict = {};
 dict.rename = UserRepository.UpdateUsername.bind(UserRepository);
 dict.changepassword = UserRepository.UpdatePassword.bind(UserRepository);
 
-module.exports = class GetUser {
+module.exports = class GetAllUsers {
   constructor() {
     this.version = '/v1';
     this.path = `${this.version}/user`;
