@@ -14,6 +14,7 @@ const UpdateUserRole = require('../../Apis/patch/UpdateUserRole');
 const UpdateUserWatchlist = require('../../Apis/patch/UpdateUserWatchlist');
 const GetUser = require('../../Apis/get/GetUser');
 const GetAllUsers = require('../../Apis/get/GetAllUsers');
+const GetUserWatchlist = require('../../Apis/get/GetUserWatchlist');
 
 const apimethods = new ApiMethods();
 
@@ -32,6 +33,7 @@ const updateUserRole = new UpdateUserRole();
 const updateUserWatchlist = new UpdateUserWatchlist();
 const getUser = new GetUser();
 const getAllUsers = new GetAllUsers();
+const getUserWatchlist = new GetUserWatchlist();
 
 // register and inject methods
 module.exports = (serverfacade) => {
@@ -62,4 +64,6 @@ module.exports = (serverfacade) => {
     HasRole(getAllUsers.allowedRoles), getAllUsers.method);
   apimethods.registerMethod(updateUserWatchlist.path, updateUserWatchlist.restfulMethod,
     HasRole(updateUserWatchlist.allowedRoles), updateUserWatchlist.method);
+  apimethods.registerMethod(getUserWatchlist.path, getUserWatchlist.restfulMethod,
+    HasRole(getUserWatchlist.allowedRoles), getUserWatchlist.method);
 };

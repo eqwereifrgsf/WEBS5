@@ -2,10 +2,11 @@ const UserRepository = require('../../Repositories/UserRepository');
 
 const dict = {};
 dict.watching = UserRepository.AddToWatchlist.bind(UserRepository);
+dict.dropped = UserRepository.AddToDroplist.bind(UserRepository);
 module.exports = class UpdateUserWatchlist {
   constructor() {
     this.version = '/v1';
-    this.path = `${this.version}/user/:idUser/watchlist/:filter/:movieId`;
+    this.path = `${this.version}/user/:idUser/:filter/:movieId`;
     this.restfulMethod = 'patch';
     this.allowedRoles = ['Superadmin', 'Admin', 'User'];
   }
@@ -15,6 +16,7 @@ module.exports = class UpdateUserWatchlist {
       if (req.JWTPayload.sub === req.params.idUser) {
         if (dict[req.params.filter.toLowerCase()]) {
           const call = req.params.filter.toLowerCase();
+          console.log(call);
           const response = dict[call](req.params.idUser, req.params.movieId);
           res.status(200).json(response);
         } else {

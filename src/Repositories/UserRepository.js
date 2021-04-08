@@ -10,19 +10,20 @@ module.exports = class UserRepository {
   }
 
   static GetAll() {
-    return UserSchema.SchemaModel.find({}).populate('Watchlist.Watching').exec()
+    return UserSchema.SchemaModel.find({}).populate('Watching').populate('Dropped').exec()
       .then((v) => v)
       .catch((err) => { throw new Error(err); });
   }
 
   static GetById(Id) {
-    return UserSchema.SchemaModel.findById(Id).populate('Watchlist.Watching').exec()
+    return UserSchema.SchemaModel.findById(Id).populate('Watching').populate('Dropped').exec()
       .then((v) => v)
       .catch((err) => { throw new Error(err); });
   }
 
   static GetSpecificWatchlist(Id, Filter) {
-    return UserSchema.SchemaModel.findById(Id).populate(`Watchlist.${Filter}`).exec()
+    console.log(Filter);
+    return UserSchema.SchemaModel.findById(Id).populate(Filter).exec()
       .then((v) => v)
       .catch((err) => { throw new Error(err); });
   }
@@ -63,14 +64,15 @@ module.exports = class UserRepository {
     return false;
   }
 
-  static async GetWatchlist(UserID, Query = '') {
-    const user = await this.GetById(UserID);
-    return user.Watchlist.filter((a) => a.Status === Query);
-  }
-
   static async AddToWatchlist(UserID, movieId) {
     const user = await this.GetById(UserID);
-    user.Watchlist.Watching.push(movieId);
+    user.Watching.push(movieId);
+    return this.Save(user);
+  }
+
+  static async AddToDroplist(UserID, movieId) {
+    const user = await this.GetById(UserID);
+    user.Dropped.push(movieId);
     return this.Save(user);
   }
 

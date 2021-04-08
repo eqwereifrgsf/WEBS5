@@ -19,10 +19,8 @@ module.exports = class UserModel {
         type: Schema.ObjectId,
         ref: 'Playlist',
       }],
-      Watchlist: {
-        Watching: [{ type: Schema.ObjectId, ref: 'Movie' }],
-        Dropped: [{ type: Schema.ObjectId, ref: 'Movie' }],
-      },
+      Watching: [{ type: Schema.ObjectId, ref: 'Movie' }],
+      Dropped: [{ type: Schema.ObjectId, ref: 'Movie' }],
     };
   }
 
