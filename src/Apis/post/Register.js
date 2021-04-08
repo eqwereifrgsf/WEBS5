@@ -1,5 +1,5 @@
-const UserModel = require('../Models/UserModel');
-const UserRepo = require('../Repositories/UserRepository');
+const UserModel = require('../../Models/UserModel');
+const UserRepo = require('../../Repositories/UserRepository');
 
 module.exports = class Register {
   constructor() {

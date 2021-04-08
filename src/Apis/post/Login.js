@@ -1,6 +1,6 @@
-const UserModel = require('../Models/UserModel');
-const UserRepo = require('../Repositories/UserRepository');
-const Auth = require('../Authentication/Auth');
+const UserModel = require('../../Models/UserModel');
+const UserRepo = require('../../Repositories/UserRepository');
+const Auth = require('../../Authentication/Auth');
 
 module.exports = class Login {
   constructor() {
