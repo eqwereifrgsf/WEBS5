@@ -17,13 +17,19 @@ module.exports = class UpdateUserCredentials {
 
   async method(req, res) {
     try {
-      const obj = JSON.parse(req.body.toString('utf-8'));
+      let obj = {};
+      try {
+        obj = JSON.parse(req.body.toString('utf-8'));
+      } catch (e) {
+        obj = req.body;
+      }
       // eslint-disable-next-line
       for (const entry of obj.array) {
         dict[entry.op](req.params.idUser, entry.value, entry.path.substring(1));
       }
       res.status(200).json('OK');
     } catch (error) {
+      console.log(error);
       res.status(500).send('Error');
     }
   }
