@@ -22,8 +22,7 @@ module.exports = class UserRepository {
   }
 
   static GetSpecificWatchlist(Id, Filter) {
-    console.log(Filter);
-    return UserSchema.SchemaModel.findById(Id).populate(Filter).exec()
+    return UserSchema.SchemaModel.findById(Id).populate(Filter).select(Filter).exec()
       .then((v) => v)
       .catch((err) => { throw new Error(err); });
   }
@@ -64,15 +63,16 @@ module.exports = class UserRepository {
     return false;
   }
 
-  static async AddToWatchlist(UserID, movieId) {
+  static async UpdateWatchlist(UserID, movieId, Path) {
     const user = await this.GetById(UserID);
-    user.Watching.push(movieId);
+    console.log(Path);
+    user[`${Path}`].push(movieId);
     return this.Save(user);
   }
 
-  static async AddToDroplist(UserID, movieId) {
+  static async RemoveFromWatchlist(UserID, movieId, Path) {
     const user = await this.GetById(UserID);
-    user.Dropped.push(movieId);
+    user[`${Path}`].pull(movieId);
     return this.Save(user);
   }
 

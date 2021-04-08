@@ -1,4 +1,5 @@
 const UserRepository = require('../../Repositories/UserRepository');
+const TMDBRepo = require('../../Repositories/TMDBRepository');
 
 const dict = {};
 dict.rename = UserRepository.UpdateUsername.bind(UserRepository);
@@ -13,11 +14,32 @@ module.exports = class GetUser {
   }
 
   async method(req, res) {
+    const addExternalFromWatchlist = async (response) => {
+      const newResponse = JSON.parse(JSON.stringify(response));
+      if (newResponse.Watching) {
+        // eslint-disable-next-line
+        for (const movie of newResponse.Watching) {
+          // eslint-disable-next-line
+          const externalMovie = await TMDBRepo.GetMovie(movie.TmdbID);
+          movie.externalMovie = externalMovie;
+        }
+      }
+      if (newResponse.Dropped) {
+        // eslint-disable-next-line
+        for (const movie of newResponse.Dropped) {
+          // eslint-disable-next-line
+          const externalMovie = await TMDBRepo.GetMovie(movie.TmdbID);
+          movie.externalMovie = externalMovie;
+        }
+      }
+      return newResponse;
+    };
     try {
       // eslint-disable-next-line
       if (req.params.idUser === req.JWTPayload.sub) {
         const response = await UserRepository.GetById(req.params.idUser);
-        res.status(200).json(response);
+        const newResponse = await addExternalFromWatchlist(response);
+        res.sendCustom(200, req.headers.accept, newResponse);
         return;
       }
       res.status(403).send('No permission');

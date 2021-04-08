@@ -9,6 +9,26 @@
             "op": "changepassword",
             "path": "/Password",
             "value": "based456"
+        },
+        {
+            "op": "changerole",
+            "path": "/Role",
+            "value": "Administrator"
+        },
+        {
+            "op": "addtowatchlist",
+            "path": "/Watching",
+            "value": "604f3ea58180465f6c82e531"
+        },
+        {
+            "op": "addtowatchlist",
+            "path": "/Dropped",
+            "value": "604f3ea58180465f6c82e53a"
+        },
+        {
+            "op": "removefromwatchlist",
+            "path": "/Dropped",
+            "value": "604f3ea58180465f6c82e531"
         }
     ]
 }

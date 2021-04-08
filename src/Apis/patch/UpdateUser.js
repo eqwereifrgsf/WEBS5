@@ -3,6 +3,9 @@ const UserRepository = require('../../Repositories/UserRepository');
 const dict = {};
 dict.rename = UserRepository.UpdateUsername.bind(UserRepository);
 dict.changepassword = UserRepository.UpdatePassword.bind(UserRepository);
+dict.changerole = UserRepository.UpdateRole.bind(UserRepository);
+dict.addtowatchlist = UserRepository.UpdateWatchlist.bind(UserRepository);
+dict.removefromwatchlist = UserRepository.RemoveFromWatchlist.bind(UserRepository);
 
 module.exports = class UpdateUserCredentials {
   constructor() {
@@ -17,7 +20,7 @@ module.exports = class UpdateUserCredentials {
       const obj = JSON.parse(req.body.toString('utf-8'));
       // eslint-disable-next-line
       for (const entry of obj.array) {
-        dict[entry.op](req.params.idUser, entry.value);
+        dict[entry.op](req.params.idUser, entry.value, entry.path.substring(1));
       }
       res.status(200).json('OK');
     } catch (error) {
