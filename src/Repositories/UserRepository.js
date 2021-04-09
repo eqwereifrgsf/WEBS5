@@ -30,7 +30,7 @@ module.exports = class UserRepository {
   static FindByModel(Model) {
     return UserSchema.SchemaModel.find(Model).exec()
       .then((v) => v)
-      .catch((err) => { throw new Error(err); });
+      .catch((err) => { console.log(err); });
   }
 
   static async RemoveFromPlaylists(Playlist, UserID) {
