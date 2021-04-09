@@ -65,7 +65,6 @@ module.exports = class UserRepository {
 
   static async UpdateWatchlist(UserID, movieId, Path) {
     const user = await this.GetById(UserID);
-    console.log(Path);
     user[`${Path}`].push(movieId);
     return this.Save(user);
   }
