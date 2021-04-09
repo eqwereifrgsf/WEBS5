@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "6cc4b777-713f-4bc3-9245-66fbb149520c",
+		"name": "DELETE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Delete movie by ID - Requires admin +",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Formatting",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Username",
+							"value": "Testuser333",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "Testpassword123",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://webs5cloudservices.herokuapp.com/v1/movie/<INSERT_MOVIE_ID>",
+					"protocol": "https",
+					"host": [
+						"webs5cloudservices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"movie",
+						"<INSERT_MOVIE_ID>"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete playlist by ID - Requires admin +",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Formatting",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Username",
+							"value": "Testuser333",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "Testpassword123",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://webs5cloudservices.herokuapp.com/v1/playlist/<INSERT_PLAYLIST_ID>",
+					"protocol": "https",
+					"host": [
+						"webs5cloudservices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"playlist",
+						"<INSERT_PLAYLIST_ID>"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user by ID - - Requires admin +",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Formatting",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Username",
+							"value": "Testuser333",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "Testpassword123",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://webs5cloudservices.herokuapp.com/v1/user/<INSERT_USER_ID>",
+					"protocol": "https",
+					"host": [
+						"webs5cloudservices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"user",
+						"<INSERT_USER_ID>"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

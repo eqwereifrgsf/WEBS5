@@ -1,0 +1,323 @@
+{
+	"info": {
+		"_postman_id": "8f35ba75-1d24-462f-814f-3e90552bcfa8",
+		"name": "GET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Multisearch - provided by external API TheMovieDatabase",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Formatting",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Username",
+							"value": "Testuser333",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "Testpassword123",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://webs5cloudservices.herokuapp.com/v1/multisearch/mission",
+					"protocol": "https",
+					"host": [
+						"webs5cloudservices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"multisearch",
+						"mission"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Users - Requires admin +",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Formatting",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Username",
+							"value": "Testuser333",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "Testpassword123",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://webs5cloudservices.herokuapp.com/v1/user",
+					"protocol": "https",
+					"host": [
+						"webs5cloudservices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User by ID - Requires admin / JWTPayload to match current user ID",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Formatting",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Username",
+							"value": "Testuser333",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "Testpassword123",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://webs5cloudservices.herokuapp.com/v1/user/<INSERT_USER_ID>",
+					"protocol": "https",
+					"host": [
+						"webs5cloudservices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"user",
+						"<INSERT_USER_ID>"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User watchlist by ID (2nd parameter optional to filter by watching / dropped)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Formatting",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Username",
+							"value": "Testuser333",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "Testpassword123",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://webs5cloudservices.herokuapp.com/v1/user/<INSERT_USER_ID>/watching",
+					"protocol": "https",
+					"host": [
+						"webs5cloudservices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"user",
+						"<INSERT_USER_ID>",
+						"watching"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get playlist by ID OR get all playlist (2nd parameter optional)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Formatting",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Username",
+							"value": "Testuser333",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "Testpassword123",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://webs5cloudservices.herokuapp.com/v1/playlist",
+					"protocol": "https",
+					"host": [
+						"webs5cloudservices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"playlist"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

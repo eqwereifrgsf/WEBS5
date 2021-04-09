@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "1b581a7e-1f72-486e-b983-4e907017699e",
+		"name": "PATCH",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Update playlist with JSONPATCH",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Formatting",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"array\": [\r\n        {\r\n            \"op\": \"rename\",\r\n            \"path\": \"/Title\",\r\n            \"value\": \"UPDATEDPLAYLISTTITLE\"\r\n        },\r\n        {\r\n            \"op\": \"add\",\r\n            \"path\": \"/Movies\",\r\n            \"value\": \"6070b9b2b58e3a0015b397fd\"\r\n        },\r\n        {\r\n            \"op\": \"add\",\r\n            \"path\": \"/Movies\",\r\n            \"value\": \"6070b9b2b58e3a0015b397fd\"\r\n        },\r\n        {\r\n            \"op\": \"remove\",\r\n            \"path\": \"/Movies\",\r\n            \"value\": \"6070b9b2b58e3a0015b397fd\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://webs5cloudservices.herokuapp.com/v1/playlist/<INSERT_PLAYLIST_ID>",
+					"protocol": "https",
+					"host": [
+						"webs5cloudservices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"playlist",
+						"<INSERT_PLAYLIST_ID>"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a user with JSONPATCH",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Formatting",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"array\": [\r\n        {\r\n            \"op\": \"rename\",\r\n            \"path\": \"/Username\",\r\n            \"value\": \"Henk\"\r\n        },\r\n        {\r\n            \"op\": \"changepassword\",\r\n            \"path\": \"/Password\",\r\n            \"value\": \"based456\"\r\n        },\r\n        {\r\n            \"op\": \"changerole\",\r\n            \"path\": \"/Role\",\r\n            \"value\": \"Administrator\"\r\n        },\r\n        {\r\n            \"op\": \"addtowatchlist\",\r\n            \"path\": \"/Watching\",\r\n            \"value\": \"6070b9b2b58e3a0015b397fd\"\r\n        },\r\n        {\r\n            \"op\": \"addtowatchlist\",\r\n            \"path\": \"/Dropped\",\r\n            \"value\": \"6070b9b2b58e3a0015b39800\"\r\n        },\r\n        {\r\n            \"op\": \"addtowatchlist\",\r\n            \"path\": \"/Dropped\",\r\n            \"value\": \"6070b9b2b58e3a0015b39800\"\r\n        },\r\n        {\r\n            \"op\": \"removefromwatchlist\",\r\n            \"path\": \"/Dropped\",\r\n            \"value\": \"6070b9b2b58e3a0015b39800\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://webs5cloudservices.herokuapp.com/v1/user/<INSERT_USER_ID>",
+					"protocol": "https",
+					"host": [
+						"webs5cloudservices",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"user",
+						"<INSERT_USER_ID>"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
