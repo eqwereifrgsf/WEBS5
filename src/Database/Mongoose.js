@@ -5,8 +5,8 @@ Mongoose.connect('mongodb+srv://mongoun:mongopw@cluster0.yxmsq.mongodb.net/webs5
   useUnifiedTopology: true,
   useFindAndModify: false,
   useCreateIndex: true,
-  server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
-  replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
-});
+})
+  .then(() => console.log('Database connected!'))
+  .catch((err) => console.log(err));
 
 module.exports = { Mongoose };
