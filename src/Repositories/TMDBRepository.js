@@ -7,7 +7,6 @@ module.exports = class TMDBRepository {
       const response = await httpFacade.get(`${process.env.BASE_API_URL}${process.env.API_VERSION}/search/multi?api_key=${process.env.API_KEY}&language=${language}&query=${query}&page=${page}&include_adult=${includeAdult}`);
       return response.data.results;
     } catch (error) {
-      // console.log(error);
     }
     return {};
   }
@@ -18,7 +17,6 @@ module.exports = class TMDBRepository {
       let response = await httpFacade.get(`${process.env.BASE_API_URL}${process.env.API_VERSION}/movie/${MovieID}?api_key=${process.env.API_KEY}`);
       return response.data;
     } catch (error) {
-      // console.log(error);
     }
     return {};
   }

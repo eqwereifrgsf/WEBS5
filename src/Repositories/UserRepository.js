@@ -34,7 +34,6 @@ module.exports = class UserRepository {
   }
 
   static async RemoveFromPlaylists(Playlist, UserID) {
-    console.log(UserID);
     const user = await this.GetById(UserID);
     if (user) {
       user.Playlists.pull(Playlist);
