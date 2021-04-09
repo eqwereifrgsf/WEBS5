@@ -17,7 +17,6 @@ module.exports = class UpdateUserCredentials {
 
   async method(req, res) {
     try {
-      console.log(req.body);
       let obj = {};
       try {
         obj = JSON.parse(req.body.toString('utf-8'));
@@ -31,7 +30,6 @@ module.exports = class UpdateUserCredentials {
       }
       res.sendCustom(200, req.headers.formatting, 'OK');
     } catch (error) {
-      console.log(error);
       res.status(500).send('Error');
     }
   }

@@ -24,9 +24,9 @@ describe('Gets', () => {
       res.json = function(response) {
         assert.notStrictEqual(response, null);
         assert.notStrictEqual(response, undefined);
-        done();
       };
       multiSearch.method(req, res);
+      done();
     });
   });
   describe('Playlist', () => {
@@ -61,9 +61,9 @@ describe('Gets', () => {
       res.json = function(response) {
         assert.notStrictEqual(response, null);
         assert.notStrictEqual(response, undefined);
-        done();
       };
       users.method(req, res);
+      done();
     });
   });
 });

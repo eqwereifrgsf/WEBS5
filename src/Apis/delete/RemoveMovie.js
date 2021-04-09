@@ -9,7 +9,6 @@ module.exports = class RemoveMovie {
   }
 
   async method(req, res) {
-    console.log('lmfaoxasodkoasidfj');
     const response = await MovieRepository.Remove(req.params.movieID);
     res.sendCustom(200, req.headers.formatting, response);
   }

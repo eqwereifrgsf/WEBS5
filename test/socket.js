@@ -33,8 +33,8 @@ describe('Sockets', () => {
       socket.on('chat', () => {
         socket.disconnect();
         socketFacade.stop();
+        done();
       });
-      done();
     });
   });
 
@@ -53,6 +53,7 @@ describe('Sockets', () => {
           assert.strictEqual(message, 'VERIFICATION');
           socket.disconnect();
           socketFacade.stop();
+          done();
         }
         if (onceSwitch) {
           onceSwitch = false;
@@ -62,7 +63,6 @@ describe('Sockets', () => {
           socketFacade.messageToRoom('chat', m);
         }
       });
-      done();
     });
   });
 
@@ -83,8 +83,8 @@ describe('Sockets', () => {
         assert.strictEqual(room, 'chat');
         socket.disconnect();
         socketFacade.stop();
+        done();
       });
-      done();
     });
   });
 });
