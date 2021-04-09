@@ -66,24 +66,4 @@ describe('Gets', () => {
       users.method(req, res);
     });
   });
-  describe('User', () => {
-    it(`Can get /user/id`, (done) => {
-      user = new User();
-
-      const req = {};
-      req.params = {};
-      req.params.idUser = "606f696905ebf95df09723aa";
-      req.query = {};
-      const res = {};
-      res.status = function() {
-        return this;
-      };
-      res.json = function(response) {
-        assert.notStrictEqual(response, null);
-        assert.notStrictEqual(response, undefined);
-        done();
-      };
-      users.method(req, res);
-    });
-  });
 });
