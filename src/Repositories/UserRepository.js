@@ -97,7 +97,7 @@ module.exports = class UserRepository {
   static Save(Model) {
     return Model.save()
       .then((v) => v)
-      .catch(() => false);
+      .catch((err) => console.log(err));
   }
 
   //   Update(Model) {}
