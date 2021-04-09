@@ -46,7 +46,7 @@ module.exports = class GetMultiSearch {
     if (req.params.playlistID) {
       const response = await PlaylistRepository.GetByIdPopulateMovies(playlistID);
       const newResponse = await addExternalFromPlaylist(response);
-      res.sendCustom(200, req.headers.accept, newResponse);
+      res.sendCustom(200, req.headers.formatting, newResponse);
     } else {
       const response = await PlaylistRepository.GetAllPopulateMovies(page);
       const newResponse = await addExternalFromPlaylistArray(response);

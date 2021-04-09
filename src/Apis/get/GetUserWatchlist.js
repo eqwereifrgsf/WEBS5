@@ -38,7 +38,7 @@ module.exports = class GetUserWatchlist {
       const response = await
       UserRepository.GetSpecificWatchlist(req.params.idUser, cap);
       const newResponse = await addExternalFromWatchlist(response);
-      res.sendCustom(200, req.headers.accept, newResponse);
+      res.sendCustom(200, req.headers.formatting, newResponse);
     }
   }
 };

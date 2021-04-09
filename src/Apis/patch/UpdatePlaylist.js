@@ -24,9 +24,10 @@ module.exports = class UpdatePlaylist {
       }
       // eslint-disable-next-line
       for (const entry of obj.array) {
-        dict[entry.op](req.params.idPlaylist, entry.value);
+        // eslint-disable-next-line
+        await dict[entry.op](req.params.idPlaylist, entry.value);
       }
-      res.status(200).json('OK');
+      res.sendCustom(200, req.headers.formatting, 'OK');
     } catch (error) {
       res.status(500).send('Error');
     }

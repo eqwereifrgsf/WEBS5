@@ -10,6 +10,6 @@ module.exports = class RemoveUser {
 
   async method(req, res) {
     const response = await UserRepository.Remove(req.params.userID);
-    res.status(200).json(response);
+    res.sendCustom(200, req.headers.formatting, response);
   }
 };

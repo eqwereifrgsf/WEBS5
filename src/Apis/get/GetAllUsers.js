@@ -14,8 +14,8 @@ module.exports = class GetAllUsers {
 
   async method(req, res) {
     try {
-      const response = UserRepository.GetAll();
-      res.status(200).json(response);
+      const response = await UserRepository.GetAll();
+      res.sendCustom(200, req.headers.formatting, response);
     } catch (error) {
       res.status(500).send('Error');
     }

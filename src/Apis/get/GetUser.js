@@ -36,10 +36,10 @@ module.exports = class GetUser {
     };
     try {
       // eslint-disable-next-line
-      if (req.params.idUser === req.JWTPayload.sub) {
+      if (req.params.idUser === req.JWTPayload.sub || req.JWTPayload.loggedInAs !== 'User') {
         const response = await UserRepository.GetById(req.params.idUser);
         const newResponse = await addExternalFromWatchlist(response);
-        res.sendCustom(200, req.headers.accept, newResponse);
+        res.sendCustom(200, req.headers.formatting, newResponse);
         return;
       }
       res.status(403).send('No permission');

@@ -17,6 +17,6 @@ module.exports = class GetMultiSearch {
         TmdbID: e.id,
       });
     });
-    res.status(200).json(response);
+    res.sendCustom(200, req.headers.formatting, response);
   }
 };

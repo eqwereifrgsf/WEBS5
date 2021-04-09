@@ -34,9 +34,13 @@ module.exports = class UserRepository {
   }
 
   static async RemoveFromPlaylists(Playlist, UserID) {
+    console.log(UserID);
     const user = await this.GetById(UserID);
-    user.Playlists.pull(Playlist);
-    return this.Save(user);
+    if (user) {
+      user.Playlists.pull(Playlist);
+      return this.Save(user);
+    }
+    return false;
   }
 
   static async UpdateUsername(UserID, Username) {

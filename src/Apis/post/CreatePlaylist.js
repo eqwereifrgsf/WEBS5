@@ -15,6 +15,6 @@ module.exports = class CreatePlaylist {
         _Creator: req.JWTPayload.sub,
       },
     );
-    res.status(200).json(response);
+    res.sendCustom(200, req.headers.formatting, `Created ${response.Title}`);
   }
 };

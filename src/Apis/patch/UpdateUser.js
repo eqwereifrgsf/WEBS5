@@ -17,6 +17,7 @@ module.exports = class UpdateUserCredentials {
 
   async method(req, res) {
     try {
+      console.log(req.body);
       let obj = {};
       try {
         obj = JSON.parse(req.body.toString('utf-8'));
@@ -25,9 +26,10 @@ module.exports = class UpdateUserCredentials {
       }
       // eslint-disable-next-line
       for (const entry of obj.array) {
-        dict[entry.op](req.params.idUser, entry.value, entry.path.substring(1));
+        // eslint-disable-next-line
+        await dict[entry.op](req.params.idUser, entry.value, entry.path.substring(1));
       }
-      res.status(200).json('OK');
+      res.sendCustom(200, req.headers.formatting, 'OK');
     } catch (error) {
       console.log(error);
       res.status(500).send('Error');
